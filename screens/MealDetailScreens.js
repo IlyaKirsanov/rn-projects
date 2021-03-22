@@ -1,16 +1,28 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { MEALS } from '../data/dummy-data'
 
 
 const MealDetailScreens = props => {
+	const mealId = props.navigation.getParam('mealId')
+	const selectedMeal = MEALS.find(meal => meal.id === mealId)
 	return (
 		<View style={styles.screen}>
-			<Text>The MealDetailScreens screen</Text>
+			<Text>{selectedMeal.title}</Text>
 			<Button title="Go back to categories" onPress={() => {
 				props.navigation.popToTop()
 			}} />
 		</View>
 	)
+}
+
+MealDetailScreens.navigationOptions = (navigationData) => {
+
+	const mealId = navigationData.navigation.getParam('mealId')
+	const selectedMeal = MEALS.find(meal => meal.id === mealId)
+	return {
+		headerTitle: selectedMeal.title
+	}
 }
 
 const styles = StyleSheet.create({
