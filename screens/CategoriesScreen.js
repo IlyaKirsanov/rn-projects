@@ -2,9 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity, Platform } from 'react-native'
 import { CATEGORIES } from '../data/dummy-data'
 import Colors from '../constants/Colors'
-
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CategoryGrid from '../components/CategoryGrid'
-
+import HeaderButton from '../components/HeaderButton'
 
 const CategoriesScreen = props => {
 
@@ -33,6 +33,19 @@ const CategoriesScreen = props => {
 			renderItem={renderGridItem}
 		/>
 	)
+}
+
+CategoriesScreen.navigationOptions = (navData) => {
+
+	return {
+		headerTitle: 'Meal Categories',
+		headerLeft:
+			<HeaderButtons HeaderButtonComponent={HeaderButton}>
+				<Item title="Menu" iconName='ios-menu' onPress={() => navData.navigation.openDrawer()} />
+			</HeaderButtons>
+
+	}
+
 }
 
 const styles = StyleSheet.create({
